@@ -1,0 +1,97 @@
+.navbar{
+  height: 150px;
+  background: linear-gradient(#410B76 10%, black 150%);
+
+  & .navbar-header{
+
+    text-align: center;
+    width: 100%;
+    margin: auto;
+
+    & .navbar-quick{
+      color: white;
+      height: 40px;
+      padding: 10px;
+
+      & span{
+        zoom: 1.5;
+        opacity: 0.4;
+        cursor: pointer;
+
+        &:hover{opacity: 0.8;}
+
+        &:first-child{ float: right } // search
+        &:last-child{ float: left } // add
+      }
+
+    }
+
+    & .navbar-brand{
+      float: none;
+      color: white;
+      text-transform: uppercase;
+      height: 100%;
+    }
+
+    & .navbar-menu{
+      text-align: center;
+      margin-top: 20px;
+
+      & button{
+        margin-left: 20px;
+        background: transparent;
+        color: white;
+        border: none;
+
+        &:focus{
+          outline: none;
+        }
+
+        &.selected{
+          border: solid 1px white;
+          border-radius: 30px;
+        }
+      }
+    }
+  }
+}
+
+.main{
+
+  margin-bottom: 40px;
+
+  input{
+    margin-bottom: 20px;
+  }
+
+  h1{font-size: 20px;}
+
+  .btn{
+    width: 100%;
+    background: #410B76;
+  }
+
+  .product{
+    border-bottom: solid 1px lightgrey;
+    padding: 40px 20px;
+
+    & a {
+      color: red;
+      cursor: pointer;
+    }
+
+    & .left{
+      float:left;
+    }
+
+    & .right{
+      text-align: right;
+    }
+  }
+
+  #addFormProduct, #searchFormProduct{
+    display: none;
+  }
+
+
+}

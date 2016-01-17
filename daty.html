@@ -1,0 +1,75 @@
+<head>
+  <title>Daty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body ng-app="daty" ng-controller="DatyListCtrl">
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+
+        <div class="navbar-quick">
+          <span id="btn-search" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          <span id="btn-add" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </div>
+
+        <a class="navbar-brand" href="#">Products</a>
+
+        <div class="navbar-menu">
+          <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('limitProducts');">Limit</button>
+          <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('outOfDateProducts');">Out of date</button>
+          <button type="button" class="btn btn-default navbar-btn selected" ng-click="updateListProducts('allProducts');">All</button>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container main">
+
+    <!-- ADD FORM -->
+     <header id="addFormProduct">
+       <h1>Add an product</h1>
+        <form class="new-product" ng-submit="addProduct(labelProduct, quantityProduct, dueDateProduct, locationProduct); newProduct='';">
+
+          <input ng-model="labelProduct" type="text" class="form-control" name="text" placeholder="Label" required />
+          <input ng-model="quantityProduct" type="text" class="form-control" name="quantity" placeholder="Quantity" required />
+          <input ng-model="dueDateProduct" type="date" class="form-control" name="dueDate" placeholder="Due date" required />
+          <input ng-model="locationProduct" type="text" class="form-control" name="location" placeholder="Location" required />
+
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+     </header>
+
+     <!-- SEARCH FORM -->
+      <header id="searchFormProduct">
+        <h1>Search some products</h1>
+         <form class="search-product" ng-submit="searchProducts(searchProduct);">
+
+           <input ng-model="searchProduct" type="text" class="form-control" name="text" placeholder="Search...." />
+
+           <button type="submit" class="btn btn-primary">Search</button>
+         </form>
+      </header>
+
+    <!-- LIST -->
+    <div id="listProduct">
+      <h1>List of products</h1>
+      <div ng-repeat="product in upToDateProducts" class="product col-lg-4 col-sm-3">
+
+        <div class="left">
+          <div class="text">{{product.label}}</div>
+          <div class="text">{{product.quantity}} left</div>
+          <a class="delete" ng-click="upToDateProducts.remove(product)">(remove)</a>
+        </div>
+        <div class="right">
+          <div class="text">{{product.dueDate | date:'dd/MM/yyyy'}}</div>
+          <div class="text">{{product.location}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>

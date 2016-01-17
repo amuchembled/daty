@@ -14,12 +14,12 @@
           <span id="btn-add" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </div>
 
-        <a class="navbar-brand" href="#">Products</a>
+        <a class="navbar-brand" href="#">{{ 'APP_NAME' | translate }}</a>
 
         <div class="navbar-menu">
-          <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('limitProducts');">Limit</button>
-          <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('outOfDateProducts');">Out of date</button>
-          <button type="button" class="btn btn-default navbar-btn selected" ng-click="updateListProducts('allProducts');">All</button>
+          <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('limitProducts');">{{ 'BTN_LIMIT' | translate }}</button>
+          <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('outOfDateProducts');">{{ 'BTN_OUTOFDATE' | translate }}</button>
+          <button type="button" class="btn btn-default navbar-btn selected" ng-click="updateListProducts('allProducts');">{{ 'BTN_ALL' | translate }}</button>
         </div>
 
       </div>
@@ -31,38 +31,38 @@
 
     <!-- ADD FORM -->
      <header id="addFormProduct">
-       <h1>Add an product</h1>
+       <h1>{{ 'TITLE_ADDPRODUCT' | translate }}</h1>
         <form class="new-product" ng-submit="addProduct(labelProduct, quantityProduct, dueDateProduct, locationProduct); newProduct='';">
 
-          <input ng-model="labelProduct" type="text" class="form-control" name="text" placeholder="Label" required />
-          <input ng-model="quantityProduct" type="text" class="form-control" name="quantity" placeholder="Quantity" required />
-          <input ng-model="dueDateProduct" type="date" class="form-control" name="dueDate" placeholder="Due date" required />
-          <input ng-model="locationProduct" type="text" class="form-control" name="location" placeholder="Location" required />
+          <input ng-model="labelProduct" type="text" class="form-control" name="text" placeholder="{{ 'LABEL_LABEL' | translate }}" required />
+          <input ng-model="quantityProduct" type="text" class="form-control" name="quantity" placeholder="{{ 'LABEL_QUANTITY' | translate }}" required />
+          <input ng-model="dueDateProduct" type="date" class="form-control" name="dueDate" placeholder="{{ 'LABEL_DUEDATE' | translate }}" required />
+          <input ng-model="locationProduct" type="text" class="form-control" name="location" placeholder="{{ 'LABEL_LOCATION' | translate }}" required />
 
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="submit" class="btn btn-primary">{{ 'BTN_ADD' | translate }}</button>
         </form>
      </header>
 
      <!-- SEARCH FORM -->
       <header id="searchFormProduct">
-        <h1>Search some products</h1>
+        <h1>{{ 'TITLE_SEARCHPRODUCT' | translate }}</h1>
          <form class="search-product" ng-submit="searchProducts(searchProduct);">
 
-           <input ng-model="searchProduct" type="text" class="form-control" name="text" placeholder="Search...." />
+           <input ng-model="searchProduct" type="text" class="form-control" name="text" placeholder="{{ 'LABEL_SEARCH' | translate }}...." />
 
-           <button type="submit" class="btn btn-primary">Search</button>
+           <button type="submit" class="btn btn-primary">{{ 'BTN_SEARCH' | translate }}</button>
          </form>
       </header>
 
     <!-- LIST -->
     <div id="listProduct">
-      <h1>List of products</h1>
+      <h1>{{ 'TITLE_LISTPRODUCT' | translate }}</h1>
       <div ng-repeat="product in upToDateProducts" class="product col-lg-4 col-sm-3">
 
         <div class="left">
           <div class="text">{{product.label}}</div>
           <div class="text">{{product.quantity}} left</div>
-          <a class="delete" ng-click="upToDateProducts.remove(product)">(remove)</a>
+          <a class="delete" ng-click="upToDateProducts.remove(product)">({{ 'LABEL_REMOVE' | translate }})</a>
         </div>
         <div class="right">
           <div class="text">{{product.dueDate | date:'dd/MM/yyyy'}}</div>

@@ -1,0 +1,17 @@
+{
+  "APP_NAME": "Produits",
+  "BTN_LIMIT": "Date limite",
+  "BTN_OUTOFDATE": "Périmés",
+  "BTN_ALL": "Tous",
+  "BTN_ADD": "Ajouter",
+  "BTN_SEARCH": "Rechercher",
+  "TITLE_ADDPRODUCT": "Ajouter un produit",
+  "TITLE_SEARCHPRODUCT": "Rechercher des produits",
+  "TITLE_LISTPRODUCT": "Liste des produits",
+  "LABEL_REMOVE": "supprimer",
+  "LABEL_SEARCH": "Rechercher",
+  "LABEL_LABEL": "Nom de produit",
+  "LABEL_QUANTITY": "Quantité",
+  "LABEL_DUEDATE": "DLUO",
+  "LABEL_LOCATION": "Emplacement"
+}

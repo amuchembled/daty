@@ -19,3 +19,5 @@ angular
 twbs:bootstrap
 less
 autopublish
+planettraining:angular-translate
+planettraining:angular-translate-loader-static-files

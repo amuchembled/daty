@@ -3,7 +3,17 @@ Products = new Mongo.Collection('products');
 if (Meteor.isClient) {
 
   // This code only runs on the client
-  angular.module('daty',['angular-meteor']);
+  angular.module('daty',['angular-meteor', 'pascalprecht.translate']);
+
+  angular.module('daty').config(['$translateProvider', function ($translateProvider) {
+
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'lang/',
+      suffix: '.json'
+    });
+
+    $translateProvider.preferredLanguage('fr');
+  }]);
 
   angular.module('daty').controller('DatyListCtrl', ['$scope', '$meteor',
     function ($scope, $meteor) {

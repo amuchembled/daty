@@ -1,0 +1,17 @@
+{
+  "APP_NAME": "Products",
+  "BTN_LIMIT": "Limit",
+  "BTN_OUTOFDATE": "Out of date",
+  "BTN_ALL": "All",
+  "BTN_ADD": "Add",
+  "BTN_SEARCH": "Search",
+  "TITLE_ADDPRODUCT": "Add a product",
+  "TITLE_SEARCHPRODUCT": "Search some products",
+  "TITLE_LISTPRODUCT": "List of products",
+  "LABEL_REMOVE": "remove",
+  "LABEL_SEARCH": "Search",
+  "LABEL_LABEL": "Label",
+  "LABEL_QUANTITY": "Quantity",
+  "LABEL_DUEDATE": "Due date",
+  "LABEL_LOCATION": "Location"
+}

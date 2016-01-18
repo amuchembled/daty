@@ -15,8 +15,9 @@
         </div>
 
         <a class="navbar-brand" href="#">{{ 'APP_NAME' | translate }}</a>
+        <login-buttons></login-buttons>
 
-        <div class="navbar-menu">
+        <div class="navbar-menu" ng-show="$root.currentUser">
           <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('limitProducts');">{{ 'BTN_LIMIT' | translate }}</button>
           <button type="button" class="btn btn-default navbar-btn" ng-click="updateListProducts('outOfDateProducts');">{{ 'BTN_OUTOFDATE' | translate }}</button>
           <button type="button" class="btn btn-default navbar-btn selected" ng-click="updateListProducts('allProducts');">{{ 'BTN_ALL' | translate }}</button>
@@ -26,8 +27,7 @@
     </div>
   </nav>
 
-
-  <div class="container main">
+  <div class="container main" ng-show="$root.currentUser">
 
     <!-- ADD FORM -->
      <header id="addFormProduct">
@@ -62,7 +62,7 @@
         <div class="left">
           <div class="text">{{product.label}}</div>
           <div class="text">{{product.quantity}} left</div>
-          <a class="delete" ng-click="upToDateProducts.remove(product)">({{ 'LABEL_REMOVE' | translate }})</a>
+          <a class="delete" ng-click="deleteProduct(product)">({{ 'LABEL_REMOVE' | translate }})</a>
         </div>
         <div class="right">
           <div class="text">{{product.dueDate | date:'dd/MM/yyyy'}}</div>

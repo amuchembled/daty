@@ -1,9 +1,48 @@
 Products = new Mongo.Collection('products');
 
+if(Meteor.isClient || Meteor.isServer){
+
+  Meteor.methods({
+    searchProducts: function(searchProduct){
+      if (! Meteor.userId()) {
+        throw new Meteor.Error('not-authorized');
+      }
+      return Products.find({label: { $regex: searchProduct} });
+
+    },
+    addProduct: function (labelProduct, quantityProduct, dueDateProduct, locationProduct) {
+      if (! Meteor.userId()) {
+        throw new Meteor.Error('not-authorized');
+      }
+      Products.insert( {
+        label: labelProduct,
+        quantity: quantityProduct,
+        dueDate: dueDateProduct,
+        location: locationProduct,
+        createdAt: new Date(),
+        owner: Meteor.userId(),
+        username: Meteor.user().username }
+      );
+    },
+    deleteProduct: function(productId){
+      if (! Meteor.userId()) {
+        throw new Meteor.Error('not-authorized');
+      }
+      Products.remove(productId);
+    }
+
+  });
+}
+
+
 if (Meteor.isClient) {
 
   // This code only runs on the client
-  angular.module('daty',['angular-meteor', 'pascalprecht.translate']);
+  angular.module('daty',['angular-meteor', 'accounts.ui', 'pascalprecht.translate']);
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 
   angular.module('daty').config(['$translateProvider', function ($translateProvider) {
 
@@ -18,37 +57,46 @@ if (Meteor.isClient) {
   angular.module('daty').controller('DatyListCtrl', ['$scope', '$meteor',
     function ($scope, $meteor) {
 
-      $scope.upToDateProducts = $meteor.collection(Products);
-
-      $scope.allProducts = $meteor.collection(Products);
+      // COLLECTIONS
+      $scope.allProducts = $meteor.collection(function() {
+        return Products.find({
+          owner: Meteor.userId()
+        });
+      });
+      
+      $scope.upToDateProducts = $scope.allProducts;
 
       $scope.outOfDateProducts = $meteor.collection(function() {
-        return Products.find({dueDate:{"$lt": new Date()}});
+        return Products.find({
+          owner: Meteor.userId(),
+          dueDate:{"$lt": new Date()}
+        });
       });
 
       $scope.limitProducts = $meteor.collection(function() {
         var today = new Date(),
             to = new Date();
         to.setDate(to.getDate() + 14);
-        return Products.find({dueDate:{"$lt": to, "$gt": today}});
+        return Products.find({
+          owner: Meteor.userId(),
+          dueDate:{"$lt": to, "$gt": today}
+        });
       });
 
-      $scope.searchProducts = function(searchProduct){
-        $scope.upToDateProducts = $meteor.collection(function(){
-          return Products.find({label: { $regex: searchProduct}  });
-        });
+      // FUNCTIONS
+      $scope.searchProducts = function (searchProduct) {
+          $scope.upToDateProducts = $meteor.collection(
+            $meteor.call('searchProducts', searchProduct)
+          );
       };
 
       $scope.addProduct = function (labelProduct, quantityProduct, dueDateProduct, locationProduct) {
-        $scope.allProducts.push( {
-          label: labelProduct,
-          quantity: quantityProduct,
-          dueDate: dueDateProduct,
-          location: locationProduct,
-          createdAt: new Date() }
-        );
-
+        $meteor.call('addProduct', labelProduct, quantityProduct, dueDateProduct, locationProduct);
         $scope.updateListProducts('allProducts');
+      };
+
+      $scope.deleteProduct = function (product) {
+        $meteor.call('deleteProduct', product._id);
       };
 
       $scope.updateListProducts = function (type){

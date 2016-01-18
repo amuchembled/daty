@@ -34,6 +34,14 @@ if(Meteor.isClient || Meteor.isServer){
   });
 }
 
+if (Meteor.isServer) {
+  Meteor.publish('products', function () {
+    return Products.find({
+      owner: this.userId
+    });
+  });
+}
+
 
 if (Meteor.isClient) {
 
@@ -57,13 +65,16 @@ if (Meteor.isClient) {
   angular.module('daty').controller('DatyListCtrl', ['$scope', '$meteor',
     function ($scope, $meteor) {
 
+      // SUBSCRIPTIONS
+      $scope.$meteorSubscribe('products');
+
       // COLLECTIONS
       $scope.allProducts = $meteor.collection(function() {
         return Products.find({
           owner: Meteor.userId()
         });
       });
-      
+
       $scope.upToDateProducts = $scope.allProducts;
 
       $scope.outOfDateProducts = $meteor.collection(function() {
